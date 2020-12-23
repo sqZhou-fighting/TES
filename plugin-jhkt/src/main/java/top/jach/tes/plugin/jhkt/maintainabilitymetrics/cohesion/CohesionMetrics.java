@@ -20,14 +20,13 @@ public class CohesionMetrics {
     public static double SIDC(Microservice microservice) {
         List<TopicStruct> structs = microservice.getStructs();
         int allInterface = 0;
-        int flag = structs.size();
         Map<String, Integer> paramsStatistics = new HashMap<>();
 
         for (TopicStruct struct : structs) {
             // topic含有oneof时，以oneof为主
-            if (struct.getOneofs().size() != 0){
+            if (struct.getOneofs().size() != 0) {
                 allInterface += struct.getOneofs().size();
-                for (int i=0; i<struct.getOneofs().size(); i++){
+                for (int i = 0; i < struct.getOneofs().size(); i++) {
                     Map<String, String> structParams = struct.getParams();
                     for (Map.Entry<String, String> entry : structParams.entrySet()) {
                         if (entry.getValue().equals("oneof")) {
@@ -35,26 +34,56 @@ public class CohesionMetrics {
                         }
                         paramsStatistics.merge(entry.getValue(), 1, (oldValue, newValue) -> oldValue + newValue);
                     }
-                    for (Map.Entry<String, String> entry : struct.getOneofs().get(i).getParams().entrySet()){
+                    for (Map.Entry<String, String> entry : struct.getOneofs().get(i).getParams().entrySet()) {
                         paramsStatistics.merge(entry.getValue(), 1, (oldValue, newValue) -> oldValue + newValue);
                     }
                 }
-
-            }else {
+            } else {
+                allInterface += 1;
                 Map<String, String> structParams = struct.getParams();
                 for (Map.Entry<String, String> entry : structParams.entrySet()) {
                     paramsStatistics.merge(entry.getValue(), 1, (oldValue, newValue) -> oldValue + newValue);
                 }
-                allInterface += 1;
             }
         }
 
         int count = 0;
         for (Map.Entry<String, Integer> entry : paramsStatistics.entrySet()) {
-            if (entry.getValue() == allInterface) {
-                count++;
+            if (entry.getValue() >= allInterface) {
+                int x = 0;
+                for (TopicStruct struct : structs) {
+                    if (struct.getOneofs().size() != 0) {
+                        for (int i=0; i<struct.getOneofs().size(); i++){
+                            Map<String, String> params = new HashMap<>();
+                            params.putAll(struct.getParams());
+                            params.putAll(struct.getOneofs().get(i).getParams());
+                            for (Map.Entry<String, String> entry1 : params.entrySet()){
+                                if (entry1.getValue().equals(entry.getKey())){
+                                    x ++;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        for (Map.Entry<String, String> entry1 : struct.getParams().entrySet()){
+                            if (entry1.getValue().equals(entry.getKey())){
+                                x ++;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (x == allInterface) {
+                    count++;
+                }
             }
         }
+        System.out.println(microservice.getElementName());
+        System.out.println("allInterface   " + allInterface);
+        System.out.println("struct num   " + structs.size());
+        System.out.println("count   " + count);
+        System.out.println("papramsStatistic   " + paramsStatistics.size());
+        System.out.println();
         if (paramsStatistics.size() == 0) {
             return 0;
         }
@@ -76,21 +105,21 @@ public class CohesionMetrics {
                 count += entry.getValue();
             }
         }
-        if (middleRes.size() == 0 || microservice.getSubTopics().size() == 0){
+        if (middleRes.size() == 0 || microservice.getSubTopics().size() == 0) {
             return 0;
         }
 
         int allInterface = 0;
         List<TopicStruct> structs = microservice.getStructs();
-        for (TopicStruct struct : structs){
+        for (TopicStruct struct : structs) {
             if (struct.getOneofs().size() != 0) {
                 allInterface += struct.getOneofs().size();
-            }else {
+            } else {
                 allInterface += 1;
             }
         }
 
-        if (middleRes.size() == 0 || allInterface == 0){
+        if (middleRes.size() == 0 || allInterface == 0) {
             return 0;
         }
         return (count * 1.0) / (middleRes.size() * allInterface);

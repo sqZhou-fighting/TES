@@ -102,7 +102,12 @@ public class SizeMetrics {
     // n3 Number of interfaces
     public static Map<String, Integer> numberOfInterfaces(MicroservicesInfo microservicesInfo) {
         Map<String, Integer> res = new HashMap<>();
+
         for (Microservice microservice : microservicesInfo.getMicroservices()) {
+            int hiddenInterface = microservice.getSubTopics().size() - microservice.getStructs().size();
+            if (hiddenInterface < 0){
+                System.out.println("error");
+            }
             int tmp = 0;
             for (String str : microservice.getSubTopics()) {
                 if (microservice.getSubTopicOneOf().get(str) != null) {
@@ -111,8 +116,11 @@ public class SizeMetrics {
                     tmp += 1;
                 }
             }
-            res.put(microservice.getElementName(), tmp);
+            res.put(microservice.getElementName(), tmp + hiddenInterface);
         }
+        /*for (Microservice microservice : microservicesInfo.getMicroservices()){
+            res.put(microservice.getElementName(), microservice.getSubTopics().size());
+        }*/
         return res;
     }
 
