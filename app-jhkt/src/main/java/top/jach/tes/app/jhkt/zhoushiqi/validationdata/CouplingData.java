@@ -12,6 +12,7 @@ import top.jach.tes.plugin.jhkt.InfoNameConstant;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.CouplingMetrics;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.MyCouplingMetricsDependency;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.MyCouplingMetricsDependencyAndParams;
+import top.jach.tes.plugin.jhkt.maintainabilitymetrics.size.SizeMetrics;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.utils.DependencyUtil;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.utils.InAndOutDegree;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.utils.TopicUtil;
@@ -63,12 +64,16 @@ public class CouplingData extends DevApp {
             row00.createCell(7).setCellValue("Coupling - IncomingCouplingOfSByDependencyAndParams");
             row00.createCell(8).setCellValue("Coupling - OutgoingCouplingOfSByDependenyAndParams");
             row00.createCell(9).setCellValue("Coupling - TotalCouplingOfSByDependencyAndParams");
+            row00.createCell(10).setCellValue("Coupling - Avg number of Connected Services Directly");
+
 
 
             // Coupling类服务级指标
             Map<String, Double> relativeCouplingOfService = CouplingMetrics.relativeCouplingOfService(inAndOutDegree.getOutDegree(), microservicesInfo);
             Map<String, Double> relativeImportanceOfService = CouplingMetrics.relativeImportanceOfService(inAndOutDegree.getInDegree(), microservicesInfo);
             Map<String, Double> absCriticalityOfService = CouplingMetrics.absCriticalityOfService(inAndOutDegree.getInDegree(), inAndOutDegree.getOutDegree(), microservicesInfo);
+            Map<String, Double> serviceAndDirectly = CouplingMetrics.avgNumberOfConnectedServicesDirectly(inAndOutDegree.getInDegree(), inAndOutDegree.getOutDegree(), microservicesInfo.getMicroservices().size());
+
 
             int k = 1;
             for (Microservice microservice : microservicesInfo.getMicroservices()) {
@@ -85,6 +90,7 @@ public class CouplingData extends DevApp {
                 row_service.createCell(7).setCellValue((MyCouplingMetricsDependencyAndParams.incomingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
                 row_service.createCell(8).setCellValue((MyCouplingMetricsDependencyAndParams.outgoingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
                 row_service.createCell(9).setCellValue((MyCouplingMetricsDependencyAndParams.totalCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
+                row_service.createCell(10).setCellValue(serviceAndDirectly.get(msName));
 
                 k++;
             }

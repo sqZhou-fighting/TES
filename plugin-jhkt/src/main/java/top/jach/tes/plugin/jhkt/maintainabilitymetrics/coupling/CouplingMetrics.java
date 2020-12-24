@@ -107,5 +107,32 @@ public class CouplingMetrics {
         return absCriticality;
     }
 
-    //
+    //avgds
+    public static Map<String, Double> avgNumberOfConnectedServicesDirectly(Map<String, Set<String>> inDegree,
+                                                                            Map<String, Set<String>> rOutDegree,
+                                                                            Integer number){
+        if (inDegree == null || inDegree.size() == 0) {
+            return null;
+        }
+        if (rOutDegree == null || rOutDegree.size() == 0) {
+            return null;
+        }
+        Map<String, Set<String>> outDegree = new HashMap<>();
+        for (Map.Entry<String, Set<String>> entry : rOutDegree.entrySet()){
+            outDegree.put(entry.getKey(), entry.getValue());
+        }
+        Map<String, Double> directlyServices = new HashMap<>();
+        for (Map.Entry<String, Set<String>> entry : inDegree.entrySet()) {
+            Double tmp;
+            tmp = (entry.getValue().size() + outDegree.get(entry.getKey()).size()) / (number * 1.0);
+            directlyServices.put(entry.getKey(), tmp);
+            outDegree.remove(entry.getKey());
+        }
+        if (outDegree.size() != 0){
+            for (Map.Entry<String, Set<String>> entry : outDegree.entrySet()){
+                directlyServices.put(entry.getKey(), entry.getValue().size() / (number * 1.0));
+            }
+        }
+        return directlyServices;
+    }
 }
