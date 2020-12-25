@@ -3,6 +3,7 @@ package top.jach.tes.plugin.jhkt.maintainabilitymetrics.size;
 import top.jach.tes.plugin.jhkt.microservice.Microservice;
 import top.jach.tes.plugin.jhkt.microservice.MicroservicesInfo;
 import top.jach.tes.plugin.jhkt.microservice.Pkg;
+import top.jach.tes.plugin.jhkt.microservice.TopicStruct;
 
 import java.util.*;
 
@@ -109,14 +110,23 @@ public class SizeMetrics {
                 System.out.println("error");
             }
             int tmp = 0;
-            for (String str : microservice.getSubTopics()) {
+            for (TopicStruct struct : microservice.getStructs()){
+
+                if (struct.getOneofs().size() == 0){
+                    tmp += 1;
+                }else {
+                    tmp += struct.getOneofs().size();
+                }
+            }
+            tmp += hiddenInterface;
+            /*for (String str : microservice.getSubTopics()) {
                 if (microservice.getSubTopicOneOf().get(str) != null) {
                     tmp += microservice.getSubTopicOneOf().get(str);
                 } else {
                     tmp += 1;
                 }
-            }
-            res.put(microservice.getElementName(), tmp + hiddenInterface);
+            }*/
+            res.put(microservice.getElementName(), tmp);
         }
         /*for (Microservice microservice : microservicesInfo.getMicroservices()){
             res.put(microservice.getElementName(), microservice.getSubTopics().size());
