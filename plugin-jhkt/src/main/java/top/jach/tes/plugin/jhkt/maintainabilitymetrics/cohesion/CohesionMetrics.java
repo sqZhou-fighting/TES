@@ -78,12 +78,12 @@ public class CohesionMetrics {
                 }
             }
         }
-        System.out.println(microservice.getElementName());
+        /*System.out.println(microservice.getElementName());
         System.out.println("allInterface   " + allInterface);
         System.out.println("struct num   " + structs.size());
         System.out.println("count   " + count);
         System.out.println("papramsStatistic   " + paramsStatistics.size());
-        System.out.println();
+        System.out.println();*/
         if (paramsStatistics.size() == 0) {
             return 0;
         }

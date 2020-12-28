@@ -97,7 +97,7 @@ public class MaintainDataForPCA extends DevApp {
 
             FileOutputStream fileOutputStream;
             try {
-                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\validation\\Association\\maintain_data\\" + version.getVersionName() + ".xls");
+                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\maintain_data\\" + version.getVersionName() + ".xls");
                 wb.write(fileOutputStream);
                 fileOutputStream.close();
             } catch (Exception e) {
