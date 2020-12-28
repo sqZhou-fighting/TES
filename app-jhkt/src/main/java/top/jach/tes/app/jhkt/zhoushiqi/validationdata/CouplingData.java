@@ -58,13 +58,13 @@ public class CouplingData extends DevApp {
             row00.createCell(1).setCellValue("Coupling - Relative Coupling of Service");
             row00.createCell(2).setCellValue("Coupling - Relative Importance of Service");
             row00.createCell(3).setCellValue("Coupling - Absolute Criticality of the Service");
-            row00.createCell(4).setCellValue("Coupling - IncomingCouplingOfSByDependency");
-            row00.createCell(5).setCellValue("Coupling - OutgoingCouplingOfSByDependency");
-            row00.createCell(6).setCellValue("Coupling - TotalCouplingOfSByDependency");
-            row00.createCell(7).setCellValue("Coupling - IncomingCouplingOfSByDependencyAndParams");
-            row00.createCell(8).setCellValue("Coupling - OutgoingCouplingOfSByDependenyAndParams");
-            row00.createCell(9).setCellValue("Coupling - TotalCouplingOfSByDependencyAndParams");
-            row00.createCell(10).setCellValue("Coupling - Avg number of Connected Services Directly");
+            row00.createCell(4).setCellValue("Coupling - Avg Number Of Connected Services Directl");
+            row00.createCell(5).setCellValue("Coupling - IncomingCouplingOfSByDependency");
+            row00.createCell(6).setCellValue("Coupling - OutgoingCouplingOfSByDependency");
+            row00.createCell(7).setCellValue("Coupling - TotalCouplingOfSByDependency");
+            row00.createCell(8).setCellValue("Coupling - IncomingCouplingOfSByDependencyAndParams");
+            row00.createCell(9).setCellValue("Coupling - OutgoingCouplingOfSByDependenyAndParams");
+            row00.createCell(10).setCellValue("Coupling - TotalCouplingOfSByDependencyAndParams");
 
 
 
@@ -84,13 +84,14 @@ public class CouplingData extends DevApp {
                 row_service.createCell(1).setCellValue(relativeCouplingOfService.get(msName));
                 row_service.createCell(2).setCellValue(relativeImportanceOfService.get(msName));
                 row_service.createCell(3).setCellValue(absCriticalityOfService.get(msName));
-                row_service.createCell(4).setCellValue(MyCouplingMetricsDependency.incomingCouplingOfSByDependency(dependencies, msName));
-                row_service.createCell(5).setCellValue(MyCouplingMetricsDependency.outgoingCouplingOfSByDependency(dependencies, msName));
-                row_service.createCell(6).setCellValue(MyCouplingMetricsDependency.totalCouplingOfSByDependency(dependencies, msName));
-                row_service.createCell(7).setCellValue((MyCouplingMetricsDependencyAndParams.incomingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
-                row_service.createCell(8).setCellValue((MyCouplingMetricsDependencyAndParams.outgoingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
-                row_service.createCell(9).setCellValue((MyCouplingMetricsDependencyAndParams.totalCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
-                row_service.createCell(10).setCellValue(serviceAndDirectly.get(msName));
+                row_service.createCell(4).setCellValue(serviceAndDirectly.get(msName));
+                row_service.createCell(5).setCellValue(MyCouplingMetricsDependency.incomingCouplingOfSByDependency(dependencies, msName));
+                row_service.createCell(6).setCellValue(MyCouplingMetricsDependency.outgoingCouplingOfSByDependency(dependencies, msName));
+                row_service.createCell(7).setCellValue(MyCouplingMetricsDependency.totalCouplingOfSByDependency(dependencies, msName));
+                row_service.createCell(8).setCellValue((MyCouplingMetricsDependencyAndParams.incomingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
+                row_service.createCell(9).setCellValue((MyCouplingMetricsDependencyAndParams.outgoingCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
+                row_service.createCell(10).setCellValue((MyCouplingMetricsDependencyAndParams.totalCouplingOfSByDependencyAndParams(msName, dependencies, topics)));
+
 
                 k++;
             }

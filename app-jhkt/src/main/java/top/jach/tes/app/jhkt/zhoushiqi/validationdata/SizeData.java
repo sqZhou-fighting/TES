@@ -51,15 +51,14 @@ public class SizeData extends DevApp {
             row00.createCell(0).setCellValue("microservice");
             row00.createCell(1).setCellValue("Size - Number of Consumer Services Directly");
             row00.createCell(2).setCellValue("Size - Number of Producer Services Directly");
-            row00.createCell(3).setCellValue("Size - Avg Number Of Connected Services Directly");
-            row00.createCell(4).setCellValue("Size - Number of Operation");
-            row00.createCell(5).setCellValue("Size - Number of Pkg");
-            row00.createCell(6).setCellValue("Size - Number of Class");
+            row00.createCell(3).setCellValue("Size - Number of Operation");
+            row00.createCell(4).setCellValue("Size - Number of Pkg");
+            row00.createCell(5).setCellValue("Size - Number of Class");
+            row00.createCell(6).setCellValue("Size - Lines of Code");
 
             // Size类服务级指标
             Map<String, Integer> serviceAndConsumers = SizeMetrics.numberOfConsumerServicesDirectly(inAndOutDegree.getOutDegree());
             Map<String, Integer> serviceAndProducers = SizeMetrics.numberOfProducerServicesDirectly(inAndOutDegree.getInDegree());
-            Map<String, Integer> serviceAndDirectly = SizeMetrics.avgNumberOfConnectedServicesDirectly(inAndOutDegree.getInDegree(), inAndOutDegree.getOutDegree(), microservicesInfo.getMicroservices().size());
             Map<String, Integer> numberOfPkg = SizeMetrics.numberOfPackages(microservicesInfo);
             Map<String, Integer> numberOfClass = SizeMetrics.numberOfClasses(microservicesInfo);
             Map<String, Integer> numberOfInterface = SizeMetrics.numberOfInterfaces(microservicesInfo);
@@ -71,10 +70,10 @@ public class SizeData extends DevApp {
                 row_service.createCell(0).setCellValue(msName);
                 row_service.createCell(1).setCellValue(serviceAndConsumers.get(msName));
                 row_service.createCell(2).setCellValue(serviceAndProducers.get(msName));
-                row_service.createCell(3).setCellValue(serviceAndDirectly.get(msName));
-                row_service.createCell(4).setCellValue(numberOfInterface.get(msName));
-                row_service.createCell(5).setCellValue(numberOfPkg.get(msName));
-                row_service.createCell(6).setCellValue(numberOfClass.get(msName));
+                row_service.createCell(3).setCellValue(numberOfInterface.get(msName));
+                row_service.createCell(4).setCellValue(numberOfPkg.get(msName));
+                row_service.createCell(5).setCellValue(numberOfClass.get(msName));
+                row_service.createCell(6).setCellValue(microservice.getCodeLines());
                 k++;
             }
 
