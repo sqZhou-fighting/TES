@@ -10,6 +10,7 @@ import top.jach.tes.core.api.domain.context.Context;
 import top.jach.tes.plugin.jhkt.DataAction;
 import top.jach.tes.plugin.jhkt.InfoNameConstant;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.cohesion.CohesionMetrics;
+import top.jach.tes.plugin.jhkt.maintainabilitymetrics.cohesion.MyCohesionMetrics;
 import top.jach.tes.plugin.jhkt.microservice.Microservice;
 import top.jach.tes.plugin.jhkt.microservice.MicroservicesInfo;
 import top.jach.tes.plugin.tes.code.dependency.CSPair;
@@ -48,6 +49,7 @@ public class CohesionData extends DevApp {
             row00.createCell(1).setCellValue("Cohesion - Service Interface Data Cohesion");
             row00.createCell(2).setCellValue("Cohesion - Service Interface Usage Cohesion");
             row00.createCell(3).setCellValue("Cohesion - Total Interface Cohesion of a Service");
+            row00.createCell(4).setCellValue("Cohesion - Cohesion Graph");
 
 
             int k = 1;
@@ -59,6 +61,7 @@ public class CohesionData extends DevApp {
                 row_service.createCell(1).setCellValue((CohesionMetrics.SIDC(microservice)));
                 row_service.createCell(2).setCellValue((CohesionMetrics.SIUC(microservice, dependenciesInfo.getDependencies())));
                 row_service.createCell(3).setCellValue((CohesionMetrics.TICS(microservice, dependenciesInfo.getDependencies())));
+                row_service.createCell(4).setCellValue(MyCohesionMetrics.MSCN(microservice));
 
                 k++;
             }

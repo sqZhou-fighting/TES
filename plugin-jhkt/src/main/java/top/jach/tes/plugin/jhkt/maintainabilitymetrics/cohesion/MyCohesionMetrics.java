@@ -15,9 +15,6 @@ public class MyCohesionMetrics {
     // 求微服务中包调用的连通块数
     // microservice cohesion number
     public static double MSCN(Microservice microservice) {
-        if (microservice.getElementName().equals("x_f/x_125")){
-            System.out.println("");
-        }
         double res = 0;
 
         List<Pkg> pkgs = statisticOwnerPkgs(microservice);
@@ -32,15 +29,15 @@ public class MyCohesionMetrics {
 
         }
 
-        System.out.println("---------------------------------------------------------------------------");
+//        System.out.println("---------------------------------------------------------------------------");
         for (List<String> bl : connectedBlocks) {
-            System.out.println(bl.size() + " " + bl.size() * 1.0 / microservice.getPkgs().size());
+//            System.out.println(bl.size() + " " + bl.size() * 1.0 / microservice.getPkgs().size());
             res += (bl.size() * 1.0 / microservice.getPkgs().size())*(bl.size() * 1.0 / microservice.getPkgs().size());
         }
 
 //        System.out.println("包数量  " + microservice.getPkgs().size() + "  计算后的包数量 " + res_pkg);
 
-        System.out.println(microservice.getElementName() + " " + microservice.getPkgs().size() + " "+ res);
+//        System.out.println(microservice.getElementName() + " " + microservice.getPkgs().size() + " "+ res);
 
         return res;
     }
