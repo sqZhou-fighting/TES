@@ -18,6 +18,7 @@ import top.jach.tes.plugin.jhkt.InfoNameConstant;
 import top.jach.tes.plugin.jhkt.dts.DtssInfo;
 import top.jach.tes.plugin.jhkt.git.commit.GitCommitsForMicroserviceInfo;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.cohesion.CohesionMetrics;
+import top.jach.tes.plugin.jhkt.maintainabilitymetrics.cohesion.MyCohesionMetrics;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.CouplingMetrics;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.MyCouplingMetricsDependency;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.coupling.MyCouplingMetricsDependencyAndParams;
@@ -73,7 +74,7 @@ public class AssocaitionAllData extends DevApp {
 
             for (Microservice microservice :
                     microservicesInfo.getMicroservices()) {
-                GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = new GitCommitsForMicroserviceInfo();
+                /*GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = new GitCommitsForMicroserviceInfo();
                 gitCommitsForMicroserviceInfo
                         .setReposId(microservicesInfo.getReposId())
                         .setMicroserviceName(microservice.getElementName())
@@ -83,7 +84,9 @@ public class AssocaitionAllData extends DevApp {
                         .queryDetailsByInfoAndProjectId(gitCommitsForMicroserviceInfo, Environment.defaultProject.getId(), PageQueryDto.create(1, 1).setSortField("createdTime"));
                 if (infos.size() > 0) {
                     gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), (GitCommitsForMicroserviceInfo) infos.get(0));
-                }
+                }*/
+                GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = DataAction.queryLastGitCommitsForMicroserviceInfo(context, reposInfo.getId(), microservice.getElementName(), version);
+                gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), gitCommitsForMicroserviceInfo);
             }
 
             Map<String, TmpData> mainTainRes = MaintainRes.mainTainResult_version(microservicesInfo, dtssInfo, bugMicroserviceRelations, gitCommitsForMicroserviceInfoMap, version.getVersionName());
@@ -114,11 +117,14 @@ public class AssocaitionAllData extends DevApp {
 
             row00.createCell(16).setCellValue("Cohesion - Service Interface Data Cohesion");
             row00.createCell(17).setCellValue("Cohesion - Service Interface Usage Cohesion");
-            row00.createCell(18).setCellValue("Coesion - Total Interface Cohesion of a Service");
+            row00.createCell(18).setCellValue("Cohesion - Total Interface Cohesion of a Service");
+            row00.createCell(19).setCellValue("Cohesion - pkgs graph");
 
-            row00.createCell(19).setCellValue("Commit Overlap Ratio (COR)");
-            row00.createCell(20).setCellValue("Commit Fileset Overlap Ratio (CFOR)");
-            row00.createCell(21).setCellValue("Pairwise Committer Overlap (PCO)");
+            row00.createCell(20).setCellValue("Lines of Code");
+
+            row00.createCell(21).setCellValue("Commit Overlap Ratio (COR)");
+            row00.createCell(22).setCellValue("Commit Fileset Overlap Ratio (CFOR)");
+            row00.createCell(23).setCellValue("Pairwise Committer Overlap (PCO)");
 
 
             // Size类服务级指标
@@ -160,15 +166,18 @@ public class AssocaitionAllData extends DevApp {
                 row_service.createCell(16).setCellValue((CohesionMetrics.SIDC(microservice)));
                 row_service.createCell(17).setCellValue((CohesionMetrics.SIUC(microservice, dependenciesInfo.getDependencies())));
                 row_service.createCell(18).setCellValue((CohesionMetrics.TICS(microservice, dependenciesInfo.getDependencies())));
+                row_service.createCell(19).setCellValue(MyCohesionMetrics.MSCN(microservice));
+
+                row_service.createCell(20).setCellValue(microservice.getCodeLines());
 
                 if (mainTainRes.get(msName).getCommitOverlapRatio() != null) {
-                    row_service.createCell(19).setCellValue(mainTainRes.get(msName).getCommitOverlapRatio());
+                    row_service.createCell(21).setCellValue(mainTainRes.get(msName).getCommitOverlapRatio());
                 }
                 if (mainTainRes.get(msName).getCommitFilesetOverlapRatio() != null) {
-                    row_service.createCell(20).setCellValue(mainTainRes.get(msName).getCommitFilesetOverlapRatio());
+                    row_service.createCell(22).setCellValue(mainTainRes.get(msName).getCommitFilesetOverlapRatio());
                 }
                 if (mainTainRes.get(msName).getPairwiseCommitterOverlap() != null) {
-                    row_service.createCell(21).setCellValue(mainTainRes.get(msName).getPairwiseCommitterOverlap());
+                    row_service.createCell(23).setCellValue(mainTainRes.get(msName).getPairwiseCommitterOverlap());
                 }
 
                 k++;

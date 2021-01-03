@@ -51,7 +51,7 @@ public class MaintainDataForPCA extends DevApp {
 
             for (Microservice microservice :
                     microservicesInfo.getMicroservices()) {
-                GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = new GitCommitsForMicroserviceInfo();
+                /*GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = new GitCommitsForMicroserviceInfo();
                 gitCommitsForMicroserviceInfo
                         .setReposId(microservicesInfo.getReposId())
                         .setMicroserviceName(microservice.getElementName())
@@ -61,7 +61,10 @@ public class MaintainDataForPCA extends DevApp {
                         .queryDetailsByInfoAndProjectId(gitCommitsForMicroserviceInfo, Environment.defaultProject.getId(), PageQueryDto.create(1, 1).setSortField("createdTime"));
                 if (infos.size() > 0) {
                     gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), (GitCommitsForMicroserviceInfo) infos.get(0));
-                }
+                }*/
+
+                GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = DataAction.queryLastGitCommitsForMicroserviceInfo(context, reposInfo.getId(), microservice.getElementName(), version);
+                gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), gitCommitsForMicroserviceInfo);
             }
 
             Map<String, TmpData> mainTainRes = MaintainRes.mainTainResult_version(microservicesInfo, dtssInfo, bugMicroserviceRelations, gitCommitsForMicroserviceInfoMap, version.getVersionName());

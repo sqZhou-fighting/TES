@@ -56,8 +56,9 @@ public class DataAction implements Action {
     @Override
     public OutputInfos execute(InputInfos inputInfos, Context context) throws ActionExecuteFailedException {
         // 导入数据
-        new ImportDataAction().execute(new DefaultInputInfos().
-                putInfo(ImportDataAction.ImportDir, inputInfos.getInfo(DATAS_DIR, FileInfo.class)), context);
+        //947
+        /*new ImportDataAction().execute(new DefaultInputInfos().
+                putInfo(ImportDataAction.ImportDir, inputInfos.getInfo(DATAS_DIR, FileInfo.class)), context);*/
 
         /*ReposInfo reposInfo = outputInfos.getFirstFromProfileByInfoClassAndName(
                 ReposInfo.class, InfoNameConstant.TargetSystem, context.InfoRepositoryFactory());*/
@@ -80,13 +81,14 @@ public class DataAction implements Action {
         // 947改的
         versions.addAll(vs);
         versionsInfoForRelease.setVersions(versions);
-        context.InfoRepositoryFactory().getRepository(VersionsInfo.class).saveDetail(versionsInfoForRelease);
+        // 947 1
+//        context.InfoRepositoryFactory().getRepository(VersionsInfo.class).saveDetail(versionsInfoForRelease);
 /*        VersionsInfo versionsInfoForMaster = outputInfos.getFirstFromProfileByInfoClassAndName(
                 VersionsInfo.class, InfoNameConstant.VersionsForMaster, context.InfoRepositoryFactory());*/
 //        VersionsInfo versionsInfoForMaster = queryLastInfo(context, InfoNameConstant.VersionsForMaster, VersionsInfo.class);
 
 //         当前版本微服务数据存在错，进行纠错处理,yaodakai - 947
-        for (Version version :
+        /*for (Version version :
                 versionsInfoForRelease.getVersions()) {
             // 查询当前版本的微服务
             MicroservicesInfo microservices = queryLastMicroservices(context, reposInfo.getId(), null, version);
@@ -110,7 +112,7 @@ public class DataAction implements Action {
                 }
             }
             saveInfo(context, microservices);
-        }
+        }*/
 
         for (Repo repo :
                 reposInfo.getRepos()) {
@@ -120,6 +122,7 @@ public class DataAction implements Action {
                 /*for (int i = 0; i < gitCommitsInfoListForVersion.size(); i++) {
                     Version version = versionsInfoForRelease.getVersions().get(i);
                     GitCommitsInfo gitCommitsInfoForRepoVersion = gitCommitsInfoListForVersion.get(i);*/
+                // 这里不应该减1吧
                 for (int i = 0; i < gitCommitsInfoListForVersion.size()-1; i++) {
                     Version version = versionsInfoForRelease.getVersions().get(i);
                     GitCommitsInfo gitCommitsInfoForRepoVersion = gitCommitsInfoListForVersion.get(i+1);
@@ -145,7 +148,7 @@ public class DataAction implements Action {
         }
 
         // callRelations 这部分数据947没用，所以947把它注释掉了
-        for (Version version :
+        /*for (Version version :
                 versionsInfoForRelease.getVersions()) {
             MicroservicesInfo microservices = queryLastMicroservices(context, reposInfo.getId(), null, version);
             if (microservices == null){
@@ -155,7 +158,7 @@ public class DataAction implements Action {
             PairRelationsInfo msCallRelations = microservices.callRelationsInfoByTopic(true);
             saveInfo(context, msCallRelations.setName(InfoNameConstant.MicroserviceCallRelation));
             msCallRelations = null;
-        }
+        }*/
 
 
 /*        for (Version version :
