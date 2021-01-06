@@ -22,11 +22,16 @@ public class MyCouplingMetricsDependencyAndParams {
         double res = 0.0;
         for (CSPair csPair : allDependencies) {
             double tmp = 0.0;
+            // 找到目标服务的入度依赖
             if (csPair.getReq().getDest_cs().equals(microserviceName)) {
+                // 如何这条依赖的topic有数据结构
                 if (topics.get(csPair.getReq().getTopic()) != null) {
+                    // 每个参数权重为0.1
                     tmp += topics.get(csPair.getReq().getTopic()) * 0.1;
+                    // 如果还有rsp
                     if (csPair.getRsp() != null) {
                         if (topics.get(csPair.getRsp().getTopic()) != null) {
+                            // 加上rsp的topic的参数，并将总参数的值*2(表示双向依赖耦合强于单向依赖)
                             tmp = (tmp + topics.get(csPair.getRsp().getTopic()) * 0.1) * 2;
                         }
                     }
