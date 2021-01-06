@@ -24,7 +24,6 @@ import top.jach.tes.plugin.tes.code.repo.ReposInfo;
 
 import java.io.FileOutputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
