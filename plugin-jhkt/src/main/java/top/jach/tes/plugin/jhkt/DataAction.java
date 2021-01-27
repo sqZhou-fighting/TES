@@ -57,8 +57,8 @@ public class DataAction implements Action {
     public OutputInfos execute(InputInfos inputInfos, Context context) throws ActionExecuteFailedException {
         // 导入数据
         //947
-        /*new ImportDataAction().execute(new DefaultInputInfos().
-                putInfo(ImportDataAction.ImportDir, inputInfos.getInfo(DATAS_DIR, FileInfo.class)), context);*/
+        new ImportDataAction().execute(new DefaultInputInfos().
+                putInfo(ImportDataAction.ImportDir, inputInfos.getInfo(DATAS_DIR, FileInfo.class)), context);
 
         /*ReposInfo reposInfo = outputInfos.getFirstFromProfileByInfoClassAndName(
                 ReposInfo.class, InfoNameConstant.TargetSystem, context.InfoRepositoryFactory());*/

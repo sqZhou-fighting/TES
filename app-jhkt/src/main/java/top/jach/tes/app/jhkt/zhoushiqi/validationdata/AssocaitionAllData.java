@@ -74,17 +74,6 @@ public class AssocaitionAllData extends DevApp {
 
             for (Microservice microservice :
                     microservicesInfo.getMicroservices()) {
-                /*GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = new GitCommitsForMicroserviceInfo();
-                gitCommitsForMicroserviceInfo
-                        .setReposId(microservicesInfo.getReposId())
-                        .setMicroserviceName(microservice.getElementName())
-                        .setStatisticDiffFiles(null)
-                        .setGitCommits(null);
-                List<Info> infos = Environment.infoRepositoryFactory.getRepository(GitCommitsForMicroserviceInfo.class)
-                        .queryDetailsByInfoAndProjectId(gitCommitsForMicroserviceInfo, Environment.defaultProject.getId(), PageQueryDto.create(1, 1).setSortField("createdTime"));
-                if (infos.size() > 0) {
-                    gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), (GitCommitsForMicroserviceInfo) infos.get(0));
-                }*/
                 GitCommitsForMicroserviceInfo gitCommitsForMicroserviceInfo = DataAction.queryLastGitCommitsForMicroserviceInfo(context, reposInfo.getId(), microservice.getElementName(), version);
                 gitCommitsForMicroserviceInfoMap.put(microservice.getElementName(), gitCommitsForMicroserviceInfo);
             }
@@ -186,7 +175,7 @@ public class AssocaitionAllData extends DevApp {
 
             FileOutputStream fileOutputStream;
             try {
-                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\validation\\Association\\all_data\\" + version.getVersionName() + ".xls");
+                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\validation\\all_data\\" + version.getVersionName() + ".xls");
                 wb.write(fileOutputStream);
                 fileOutputStream.close();
             } catch (Exception e) {
