@@ -1,0 +1,32 @@
+{
+  "createdTime":0,
+  "id":0,
+  "microservices":[
+    {
+      "allPath":"",
+      "annotationLines":0,
+      "codeLines":0,
+      "elementName":"",
+      "path":"",
+      "pkgs":[
+        {
+          "files":[""],
+          "invokedPkgs":{"":[""]},
+          "pkgName":"",
+          "pkgPath":"",
+          "structs":{"":[""]}
+        }
+      ],
+      "pubTopics":[""],
+      "subTopicOneOf":{},
+      "subTopics":[""],
+      "topicOneOfMap":{},
+      "topicStructs":[]
+    }
+  ],
+  "name":"",
+  "reposId":0,
+  "status":"",
+  "updatedTime":0,
+  "version":""
+}

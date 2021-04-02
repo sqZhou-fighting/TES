@@ -29,6 +29,8 @@ import top.jach.tes.plugin.jhkt.maintainabilitymetrics.utils.InAndOutDegree;
 import top.jach.tes.plugin.jhkt.maintainabilitymetrics.utils.TopicUtil;
 import top.jach.tes.plugin.jhkt.microservice.Microservice;
 import top.jach.tes.plugin.jhkt.microservice.MicroservicesInfo;
+import top.jach.tes.plugin.jhkt.msmetricsres.MSMetricRes;
+import top.jach.tes.plugin.jhkt.msmetricsres.MSMetricResInfo;
 import top.jach.tes.plugin.tes.code.dependency.CSPair;
 import top.jach.tes.plugin.tes.code.dependency.DependenciesInfo;
 import top.jach.tes.plugin.tes.code.dependency.Direction;
@@ -36,6 +38,7 @@ import top.jach.tes.plugin.tes.code.git.version.Version;
 import top.jach.tes.plugin.tes.code.git.version.VersionsInfo;
 import top.jach.tes.plugin.tes.code.repo.ReposInfo;
 
+import javax.xml.crypto.Data;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +60,7 @@ public class AssocaitionAllData extends DevApp {
             // 计算指标所需要的数据
             MicroservicesInfo microservicesInfo = DataAction.queryLastMicroservices(context, reposInfo.getId(), null, version);
             DependenciesInfo dependenciesInfo = DataAction.queryLastDependencies(context, version);
+            MSMetricResInfo msMetricResInfo = DataAction.queryLastMSMetricResInfo(context, version);
             List<CSPair> dependencies = dependenciesInfo.getDependencies();
             CAP cap = DependencyUtil.getCAP(dependencies, microservicesInfo.getMicroservices());
             List<Direction> reqs = DependencyUtil.getDependencies(dependencies, microservicesInfo.getMicroservices());
@@ -175,7 +179,7 @@ public class AssocaitionAllData extends DevApp {
 
             FileOutputStream fileOutputStream;
             try {
-                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\validation\\all_data\\" + version.getVersionName() + ".xls");
+                fileOutputStream = new FileOutputStream("D:\\NJU\\GP\\Data\\validation\\Tuning\\" + version.getVersionName() + ".xls");
                 wb.write(fileOutputStream);
                 fileOutputStream.close();
             } catch (Exception e) {

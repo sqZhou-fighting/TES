@@ -24,4 +24,7 @@ public interface InfoNameConstant {
     String VersionsForRelease = "VersionsForRelease";
 
     String DependenciesForVersion = "DependenciesForVersion";
+
+    String MSMetricRes = "MSMetricRes";
+    String MetricMSRes = "MetricMSRes";
 }

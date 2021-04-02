@@ -211,6 +211,7 @@ public class MainTainsInfo extends Info {
 
 
             if (gitCommitsForMicroserviceInfo != null){
+                // 单个微服务的所有gitcommit
                 List<GitCommit> gitCommits = gitCommitsForMicroserviceInfo.getGitCommits();
                 StatisticDiffFiles statisticDiffFiles = new StatisticDiffFiles();
                 Long commitCount = 0l;

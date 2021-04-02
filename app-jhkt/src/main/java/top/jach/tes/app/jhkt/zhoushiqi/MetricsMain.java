@@ -122,7 +122,7 @@ public class MetricsMain extends DevApp {
             row00.createCell(17).setCellValue("Coupling - TotalExtraServiceCouplingOfS");
             row00.createCell(18).setCellValue("Cohesion - Service Interface Data Cohesion");
             row00.createCell(19).setCellValue("Cohesion - Service Interface Usage Cohesion");
-            row00.createCell(20).setCellValue("Coesion - Total Interface Cohesion of a Service");
+            row00.createCell(20).setCellValue("Cohesion - Total Interface Cohesion of a Service");
             row00.createCell(21).setCellValue("Size - Avg Number Of Connected Services Directly");
 
             // Size类服务级指标

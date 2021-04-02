@@ -16,8 +16,10 @@ import top.jach.tes.core.impl.domain.info.value.FileInfo;
 import top.jach.tes.core.impl.domain.relation.PairRelationsInfo;
 import top.jach.tes.plugin.jhkt.git.commit.GitCommitForMicroserviceAction;
 import top.jach.tes.plugin.jhkt.git.commit.GitCommitsForMicroserviceInfo;
+import top.jach.tes.plugin.jhkt.metricmsres.MetricMSResInfo;
 import top.jach.tes.plugin.jhkt.microservice.Microservice;
 import top.jach.tes.plugin.jhkt.microservice.MicroservicesInfo;
+import top.jach.tes.plugin.jhkt.msmetricsres.MSMetricResInfo;
 import top.jach.tes.plugin.jhkt.utils.JhktInfoTools;
 import top.jach.tes.plugin.tes.code.dependency.DependenciesInfo;
 import top.jach.tes.plugin.tes.code.git.commit.GitCommitsInfo;
@@ -239,6 +241,24 @@ public class DataAction implements Action {
         info.setVersion(version.getVersionName());
         info.setDependencies(null);
         info = queryLastInfo(context, info, DependenciesInfo.class);
+        return info;
+    }
+
+    // 20210329新增MSMetricResInfo从数据库中取出
+    public static MSMetricResInfo queryLastMSMetricResInfo(Context context, Version version){
+        MSMetricResInfo info = new MSMetricResInfo();
+        info.setVersion(version.getVersionName());
+        info.setMsMetricRess(null);
+        info = queryLastInfo(context, info, MSMetricResInfo.class);
+        return info;
+    }
+
+    // 20210329新增MetricMSResInfo从数据库中取出
+    public static MetricMSResInfo queryLastMetricMSResInfo(Context context, Version version){
+        MetricMSResInfo info = new MetricMSResInfo();
+        info.setVersion(version.getVersionName());
+        info.setMetricMSRess(null);
+        info = queryLastInfo(context, info, MetricMSResInfo.class);
         return info;
     }
 

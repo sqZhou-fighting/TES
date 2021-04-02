@@ -16,7 +16,7 @@ public class MyCouplingMetricsDependency {
         int res = 0;
         for (CSPair csPair : allDepedencies){
             if (csPair.getReq().getDest_cs().equals(microserviceName)) {
-                res += csPair.getRsp() != null ? 2 : 1;
+                res += csPair.getRsp() != null ? 2.5 : 1;
             }
         }
         return res;
@@ -27,7 +27,7 @@ public class MyCouplingMetricsDependency {
         int res = 0;
         for (CSPair csPair : allDepedencies){
             if (csPair.getReq().getSrc_cs().equals(microserviceName)) {
-                res += csPair.getRsp() != null ? 2 : 1;
+                res += csPair.getRsp() != null ? 2.5 : 1;
             }
         }
         return res;
@@ -39,7 +39,7 @@ public class MyCouplingMetricsDependency {
         for (CSPair csPair : allDepedencies){
             if (csPair.getReq().getSrc_cs().equals(microserviceName) ||
                     csPair.getReq().getDest_cs().equals(microserviceName)) {
-                res += csPair.getRsp() != null ? 2 : 1;
+                res += csPair.getRsp() != null ? 2.5 : 1;
             }
         }
         return res;
