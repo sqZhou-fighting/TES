@@ -11,9 +11,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Project {
-    String pro_name;
-    String description;
-    String create_time;
-    String update_time;
+@Data
+public class MSRes {
+    private String ms_name;
+    private double index;
 }

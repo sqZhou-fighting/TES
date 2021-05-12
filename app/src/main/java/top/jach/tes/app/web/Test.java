@@ -1,7 +1,12 @@
 package top.jach.tes.app.web;
 
-import top.jach.tes.app.web.dto.Microservice;
+import top.jach.tes.app.web.dto.MSMetricRes;
+import top.jach.tes.app.web.dto.MetricMSRes;
+import top.jach.tes.app.web.dto.Project;
 import top.jach.tes.app.web.service.impl.MaintainServiceImpl;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zhoushiqi
@@ -11,7 +16,10 @@ import top.jach.tes.app.web.service.impl.MaintainServiceImpl;
 public class Test {
     public static void main(String[] args) {
         MaintainServiceImpl mm = new MaintainServiceImpl();
-        Microservice microservice = mm.findMSAllMetricsRes("x_25");
+//        MSMetricRes microservice = mm.findMSAllMetricsRes("x_25");
+//        MetricMSRes metricMSRes = mm.findMetricAllMSRes("NDCS");
+        List<Project> pros = mm.findAllProject();
+//        Map<String, Double> res = mm.findMulMSMetricRes("x_25", "NO");
         System.out.println("bp");
     }
 }

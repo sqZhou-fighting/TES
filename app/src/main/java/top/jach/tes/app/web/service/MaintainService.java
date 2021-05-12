@@ -1,10 +1,9 @@
 package top.jach.tes.app.web.service;
 
-import top.jach.tes.app.web.dto.Metric;
-import top.jach.tes.app.web.dto.Microservice;
-import top.jach.tes.app.web.dto.Project;
+import top.jach.tes.app.web.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zhoushiqi
@@ -16,11 +15,13 @@ public interface MaintainService {
     List<Project> findAllProject();
 
     // 单个微服务的所有度量结果
-    Microservice findMSAllMetricsRes(String ms_name);
+    MSMetricRes findMSAllMetricsRes(String ms_name);
 
     // 单个指标的所有微服务度量结果
-    Metric findMetricAllMSRes(String metric_abb);
+    MetricMSResPlus findMetricAllMSRes(String metric_short);
 
     // 单个指标单个微服务多个版本的数值
-    List<Double> findMulMSMetricRes(String ms_name, String metric_name);
+    List<MMRes> findMulMSMetricRes(String ms_name, String metric_name);
+
+    void export(String name);
 }

@@ -27,4 +27,5 @@ public interface InfoNameConstant {
 
     String MSMetricRes = "MSMetricRes";
     String MetricMSRes = "MetricMSRes";
+    String MulMSMetric = "MulMSMetric";
 }

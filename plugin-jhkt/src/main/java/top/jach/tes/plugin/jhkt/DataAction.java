@@ -20,6 +20,7 @@ import top.jach.tes.plugin.jhkt.metricmsres.MetricMSResInfo;
 import top.jach.tes.plugin.jhkt.microservice.Microservice;
 import top.jach.tes.plugin.jhkt.microservice.MicroservicesInfo;
 import top.jach.tes.plugin.jhkt.msmetricsres.MSMetricResInfo;
+import top.jach.tes.plugin.jhkt.multimsmetric.MulMSMetricInfo;
 import top.jach.tes.plugin.jhkt.utils.JhktInfoTools;
 import top.jach.tes.plugin.tes.code.dependency.DependenciesInfo;
 import top.jach.tes.plugin.tes.code.git.commit.GitCommitsInfo;
@@ -259,6 +260,15 @@ public class DataAction implements Action {
         info.setVersion(version.getVersionName());
         info.setMetricMSRess(null);
         info = queryLastInfo(context, info, MetricMSResInfo.class);
+        return info;
+    }
+
+    // 20210406新增MulMSMetric从数据库中取出
+    public static MulMSMetricInfo queryLastMulMSMetricInfo(Context context, Version version){
+        MulMSMetricInfo info = new MulMSMetricInfo();
+        info.setVersion(version.getVersionName());
+        info.setMulMSMetricList(null);
+        info = queryLastInfo(context, info, MulMSMetricInfo.class);
         return info;
     }
 

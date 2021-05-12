@@ -6,16 +6,17 @@ import java.util.List;
 
 /**
  * @Author: zhoushiqi
- * @date: 2021/3/29
+ * @date: 2021/4/18
  * @description:
  */
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class MetricMSRes {
+public class MetricMSResPlus {
     private String metric_short;
     private String version;
-    private List<MSRes> msRess;
+    private List<DoubleMSRes> msRess;
 }

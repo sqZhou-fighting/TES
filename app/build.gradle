@@ -41,3 +41,22 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jar {
+    manifest {
+        attributes(
+                "Manifest-Version": 1.0,
+                "Main-Class": "AppApplication",
+                "Class-Path": configurations.compile.collect { "lib/${it.name}" }.join(' '))
+    }
+}
+task copyJar(type:Copy){
+
+    from configurations.runtime
+
+    into ('build/libs/lib')
+}
+
+task release(type: Copy,dependsOn: [build,copyJar]) {
+
+}

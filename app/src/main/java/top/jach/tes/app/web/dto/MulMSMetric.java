@@ -2,11 +2,11 @@ package top.jach.tes.app.web.dto;
 
 import lombok.*;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zhoushiqi
- * @date: 2021/3/29
+ * @date: 2021/4/6
  * @description:
  */
 @Getter
@@ -14,8 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MetricMSRes {
+public class MulMSMetric {
+    private String ms_name;
+    private String metric_name;
     private String metric_short;
-    private String version;
-    private List<MSRes> msRess;
+    private Map<String, Double> version_indexs;
+
 }
