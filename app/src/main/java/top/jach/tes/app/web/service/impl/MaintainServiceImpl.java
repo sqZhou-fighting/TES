@@ -33,8 +33,8 @@ public class MaintainServiceImpl implements MaintainService {
             pro.setPro_name(doc.getString("name"));
             pro.setDescription(doc.getString("status"));
             SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            pro.setCreate_time(sdf.format(new Date(doc.getLong("createdTime") * 1000)));
-            pro.setUpdate_time(sdf.format(new Date(doc.getLong("updatedTime")* 1000)));
+            pro.setCreate_time(sdf.format(new Date(doc.getLong("createdTime"))));
+            pro.setUpdate_time(sdf.format(new Date(doc.getLong("updatedTime"))));
             projects.add(pro);
         }
         return projects;
